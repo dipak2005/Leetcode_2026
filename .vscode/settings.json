@@ -3,5 +3,6 @@
         "*.ejs": "html",
         "*.html": "html",
         "functional": "cpp"
-    }
+    },
+    "jdk.advanced.disable.nbjavac": false
 }
