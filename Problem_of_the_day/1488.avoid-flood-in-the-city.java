@@ -1,0 +1,44 @@
+/*
+ * @lc app=leetcode id=1488 lang=java
+ *
+ * [1488] Avoid Flood in The City
+ */
+
+// @lc code=start
+import java.util.*;
+
+class Solution {
+    public int[] avoidFlood(int[] rains) {
+        int n = rains.length;
+        Map<Integer, Integer> map = new HashMap<>();
+        TreeSet<Integer> dryDays = new TreeSet<>();
+
+        int[] ans = new int[n];
+        Arrays.fill(ans, 1);
+
+        for (int i = 0; i < n; i++) {
+            int lake = rains[i];
+
+            if (lake == 0) {
+                dryDays.add(i);
+            } else {
+                ans[i] = -1;
+
+                if (map.containsKey(lake)) {
+                    Integer dryDay = dryDays.higher(map.get(lake));
+
+                    if (dryDay == null) {
+                        return new int[0]; // empty array
+                    }
+
+                    ans[dryDay] = lake;
+                    dryDays.remove(dryDay);
+                }
+
+                map.put(lake, i);
+            }
+        }
+        return ans;
+    }
+}
+// @lc code=end
